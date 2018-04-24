@@ -147,12 +147,14 @@ abstract class masterclass{
 
 	/** Opens form for adding new element **/
 	public function add($data = NULL) {
+		if(!CheckLogged()) gohome();
 		$this->tpl = 'addedit';  
 		return array('data' => $data, 'fields' =>$this->fields, 'options'=> $this->options);
 	}	
 	
 	/** Retrieves data of a single element for edit **/
-    public function edit($id = NULL) { 		
+    public function edit($id = NULL) { 	
+		if(!CheckLogged()) gohome();
 		if(NULL == $id) $id = $this->id;
 		return $this->add(q($this->cl)->qget($id)->run());
 
@@ -166,7 +168,8 @@ abstract class masterclass{
 
      
     /** Save element **/
-    public function save() {  //die();
+    public function save() {  
+		if(!CheckLogged()) gohome();
 		$this->parse = FALSE; 
 		$ret = $this->saveDB($this->post['form']);
 		return json_encode($ret);
@@ -199,6 +202,7 @@ abstract class masterclass{
      
     /** Delete element **/
     public function del($id = NULL) {
+		if(!CheckLogged()) gohome();
 		if(NULL == $id) $id = $this->id;
 		q($this->cl)->qdel($id)->run();
 		$this->parse = FALSE; 

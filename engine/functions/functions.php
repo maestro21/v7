@@ -388,6 +388,10 @@ function goBack(){
 	redirect($_SERVER['HTTP_REFERER']);
 }
 
+function gohome() {
+	redirect(BASE_URL);
+}
+
 
 /*** 
 	
